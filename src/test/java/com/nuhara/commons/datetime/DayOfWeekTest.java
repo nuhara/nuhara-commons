@@ -26,11 +26,11 @@ import org.junit.Test;
 
 /**
  * JUnit test for {@link DayOfWeek}
- * 
+ *
  * @author Alistair A. Israel
  */
 public final class DayOfWeekTest {
-	
+
 	/**
 	 * Test for {@link DayOfWeek#lookup(int)}
 	 */

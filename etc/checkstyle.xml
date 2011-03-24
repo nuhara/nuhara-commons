@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: nuhara-commons Checkstyle 5 configuration
+    Checkstyle-Configuration: nuhara-commons Checkstyle configuration
     Description: none
 -->
 <module name="Checker">

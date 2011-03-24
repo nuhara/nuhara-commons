@@ -21,7 +21,7 @@ import java.util.Calendar;
 
 /**
  * A Java {@code enum} to represent days of the week in the Gregorian calendar.
- * 
+ *
  * @author Alistair A. Israel
  */
 public enum DayOfWeek {
@@ -68,7 +68,7 @@ public enum DayOfWeek {
 	 *            the corresponding {@code int} constant value from
 	 *            {@link java.util.Calendar}
 	 */
-	private DayOfWeek(int intValue) {
+	private DayOfWeek(final int intValue) {
 		this.intValue = intValue;
 	}
 

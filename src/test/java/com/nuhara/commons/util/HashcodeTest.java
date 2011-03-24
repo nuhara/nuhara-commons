@@ -26,13 +26,13 @@ import org.junit.Test;
 
 /**
  * JUnit test for {@link Hashcode}.
- * 
+ *
  * @author Alistair A. Israel
  */
-public class HashcodeTest {
-	
+public final class HashcodeTest {
+
 	/**
-	 * 
+	 *
 	 */
 	private static final String ALL_YOUR_BASE_ARE_BELONG_TO_US = "All your base are belong to us.";
 
@@ -46,15 +46,15 @@ public class HashcodeTest {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHashcodeOfNothing() {
 		assertEquals(0, Hashcode.of());
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHashcodeOfObject() {
@@ -75,7 +75,7 @@ public class HashcodeTest {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Test
 	public void testHashcodeOfArray() {
@@ -87,7 +87,7 @@ public class HashcodeTest {
 				HashcodeTest.class
 		};
 		assertEquals(Arrays.hashCode(a), Hashcode.of(a));
-		
+
 		// NPE check
 		final Object[] nil = null;
 		assertEquals(Arrays.hashCode(nil), Hashcode.of(nil));

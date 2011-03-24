@@ -28,7 +28,7 @@ public final class Hashcode {
 	/**
 	 * Utility classes should not have a public or default constructor.
 	 */
-	public Hashcode() {
+	private Hashcode() {
 		// noop
 	}
 
@@ -37,7 +37,7 @@ public final class Hashcode {
 	 * arguments or {@code null}. Follows the general contract of
 	 * {@link Object#hashCode()} when given a single object. Otherwise, uses
 	 * {@link Arrays#hashCode(Object[])} with all the arguments.
-	 * 
+	 *
 	 * @param args
 	 *            the objects to include in the hash code calculation
 	 * @return the hash code

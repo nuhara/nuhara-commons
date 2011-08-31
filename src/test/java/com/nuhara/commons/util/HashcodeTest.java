@@ -41,7 +41,7 @@ public final class HashcodeTest {
 	 */
 	@Test
 	public void testHashcodeOf() {
-		final int hashcode = Hashcode.of(ALL_YOUR_BASE_ARE_BELONG_TO_US, Long.valueOf(-1));
+		final int hashcode = Hashcode.of(ALL_YOUR_BASE_ARE_BELONG_TO_US, -1L);
 		assertEquals(794092386, hashcode);
 	}
 

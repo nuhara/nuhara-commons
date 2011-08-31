@@ -40,6 +40,7 @@ public final class MonthTest {
 		for (int i = Calendar.JANUARY; i <= Calendar.DECEMBER; ++i) {
 			final Month month = Month.lookup(i);
 			assertNotNull(month);
+			assertEquals(Month.values()[i], month);
 			assertEquals(month.intValue(), i);
 		}
 	}

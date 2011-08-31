@@ -112,10 +112,10 @@ public enum Month {
 	 * @return the {@code Month}
 	 */
 	public static Month lookup(final int intValue) {
-		if (intValue >= Calendar.JANUARY && intValue <= Calendar.DECEMBER) {
-			// we only get away with this because Calendar.JANUARY == 0!
-			return Month.values()[intValue];
+		if (intValue < Calendar.JANUARY || intValue > Calendar.DECEMBER) {
+		    throw new IllegalArgumentException("Invalid month value " + intValue);
 		}
-		return null;
+		// we only get away with this because Calendar.JANUARY == 0!
+		return Month.values()[intValue];
 	}
 }

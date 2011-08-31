@@ -126,7 +126,9 @@ public final class LocalTimeTest {
     public void testToMillisPastMidnight() {
         final int[] expected = {
                 0,
-                5025678
+                5025678,
+                43200000,
+                86400000
         };
         for (int i = 0; i < expected.length; ++i) {
             final LocalTime time = TIMES[i];
@@ -139,6 +141,7 @@ public final class LocalTimeTest {
      */
     @Test
     public void testHashCode() {
+        // Note that these are the same as toMillisPastMidnight()
         final int[] expected = {
                 0,
                 5025678,

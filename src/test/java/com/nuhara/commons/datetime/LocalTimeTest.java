@@ -51,6 +51,11 @@ public final class LocalTimeTest {
             { 0, 60 },
             { 0, 0, -1 },
             { 0, 0, 60 },
+            { 0, 0, 0, -1 },
+            { 0, 0, 0, 1000 },
+            { 24, 1 },
+            { 24, 0, 1 },
+            { 24, 0, 0, 1 }
         };
         final String[] messages = {
             "Invalid hour: -1",
@@ -59,6 +64,11 @@ public final class LocalTimeTest {
             "Invalid minute: 60",
             "Invalid second: -1",
             "Invalid second: 60",
+            "Invalid millisecond: -1",
+            "Invalid millisecond: 1000",
+            "Can only represent up to 24:00:00.000!",
+            "Can only represent up to 24:00:00.000!",
+            "Can only represent up to 24:00:00.000!"
         };
         for (int i = 0; i < aargs.length; ++i) {
             final int[] args = aargs[i];

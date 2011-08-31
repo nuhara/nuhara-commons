@@ -18,6 +18,7 @@
 package com.nuhara.commons.datetime;
 
 import java.io.Serializable;
+import java.util.Formatter;
 
 /**
  * An 'abstract' time of day (in 24-hour format), with no date or time zone information. Provides up to millisecond
@@ -37,9 +38,9 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
 
     private final int minute;
 
-    private final int second;
+    private final Integer second;
 
-    private final int millis;
+    private final Integer millis;
 
     /**
      * @param hour
@@ -48,7 +49,19 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
      *        the minute
      */
     public LocalTime(final int hour, final int minute) {
-        this(hour, minute, 0, 0);
+        if (hour < 0 || hour > 24) {
+            throw new IllegalArgumentException("Invalid hour: " + hour);
+        }
+        if (hour == 24 && minute != 0) {
+            throw new IllegalArgumentException("Can only represent up to 24:00!");
+        }
+        if (minute < 0 || minute >= 60) {
+            throw new IllegalArgumentException("Invalid minute: " + minute);
+        }
+        this.hour = hour;
+        this.minute = minute;
+        this.second = null;
+        this.millis = null;
     }
 
     /**
@@ -60,7 +73,22 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
      *        the second
      */
     public LocalTime(final int hour, final int minute, final int second) {
-        this(hour, minute, second, 0);
+        if (hour < 0 || hour > 24) {
+            throw new IllegalArgumentException("Invalid hour: " + hour);
+        }
+        if (hour == 24 && !(minute == 0 && second == 0)) {
+            throw new IllegalArgumentException("Can only represent up to 24:00:00!");
+        }
+        if (minute < 0 || minute >= 60) {
+            throw new IllegalArgumentException("Invalid minute: " + minute);
+        }
+        if (second < 0 || second >= 60) {
+            throw new IllegalArgumentException("Invalid second: " + second);
+        }
+        this.hour = hour;
+        this.minute = minute;
+        this.second = Integer.valueOf(second);
+        this.millis = null;
     }
 
     /**
@@ -92,8 +120,8 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
         }
         this.hour = hour;
         this.minute = minute;
-        this.second = second;
-        this.millis = millis;
+        this.second = Integer.valueOf(second);
+        this.millis = Integer.valueOf(millis);
     }
 
     /**
@@ -114,21 +142,35 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
      * @return the second
      */
     public final int getSecond() {
-        return second;
+        if (second != null) {
+            return second.intValue();
+        }
+        return 0;
     }
 
     /**
      * @return the millis
      */
     public final int getMillis() {
-        return millis;
+        if (millis != null) {
+            return millis.intValue();
+        }
+        return 0;
     }
 
     /**
      * @return the number of milliseconds past midnight this time object represents
      */
     public final int toMillisPastMidnight() {
-        return ((((hour * 60) + minute) * 60) + second) * 1000 + millis;
+        int ms = ((hour * 60) + minute) * 60;
+        if (second != null) {
+            ms += second.intValue();
+        }
+        ms *= 1000;
+        if (millis != null) {
+            ms += millis.intValue();
+        }
+        return ms;
     }
 
     /**
@@ -160,8 +202,11 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
             return false;
         }
         final LocalTime other = (LocalTime) obj;
-        return this.hour == other.hour && this.minute == other.minute && this.second == other.second
-                && this.millis == other.millis;
+        if (this.hour != other.hour || this.minute != other.minute) {
+            return false;
+        }
+        return this.hour == other.hour && this.minute == other.minute && this.getSecond() == other.getSecond()
+                && this.getMillis() == other.getMillis();
     }
 
     /**
@@ -181,6 +226,26 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
         } else {
             return 1;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @see java.lang.Object#toString()
+     */
+    // SUPPRESS CHECKSTYLE DesignForExtension
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        final Formatter f = new Formatter(sb);
+        f.format("%02d:%02d", hour, minute);
+        if (second != null) {
+            f.format(":%02d", second.intValue());
+            if (millis != null) {
+                f.format(".%03d", millis.intValue());
+            }
+        }
+        return sb.toString();
     }
 
 }

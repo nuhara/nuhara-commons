@@ -37,7 +37,22 @@ public final class LocalTimeTest {
 
     private static final LocalTime NEXT_MIDNIGHT = new LocalTime(24, 0);
 
-    private static final LocalTime[] TIMES = { LAST_MIDNIGHT, new LocalTime(1, 23, 45, 678), NOON, NEXT_MIDNIGHT };
+    private static final LocalTime[] TIMES = {
+        LAST_MIDNIGHT,
+        new LocalTime(1, 23, 45, 678),
+        NOON,
+        NEXT_MIDNIGHT
+    };
+
+    /**
+     *
+     */
+    @Test
+    public void testToString() {
+        assertEquals("12:00", NOON.toString());
+        assertEquals("08:03:00", new LocalTime(8, 3, 0).toString());
+        assertEquals("01:23:45.678", TIMES[1].toString());
+    }
 
     /**
      * Test construction with invalid parameters
@@ -66,8 +81,8 @@ public final class LocalTimeTest {
             "Invalid second: 60",
             "Invalid millisecond: -1",
             "Invalid millisecond: 1000",
-            "Can only represent up to 24:00:00.000!",
-            "Can only represent up to 24:00:00.000!",
+            "Can only represent up to 24:00!",
+            "Can only represent up to 24:00:00!",
             "Can only represent up to 24:00:00.000!"
         };
         for (int i = 0; i < aargs.length; ++i) {
@@ -109,7 +124,10 @@ public final class LocalTimeTest {
      */
     @Test
     public void testToMillisPastMidnight() {
-        final int[] expected = { 0, 5025678 };
+        final int[] expected = {
+                0,
+                5025678
+        };
         for (int i = 0; i < expected.length; ++i) {
             final LocalTime time = TIMES[i];
             assertEquals(expected[i], time.toMillisPastMidnight());
@@ -121,7 +139,12 @@ public final class LocalTimeTest {
      */
     @Test
     public void testHashCode() {
-        final int[] expected = { 0, 5025678, 43200000, 86400000 };
+        final int[] expected = {
+                0,
+                5025678,
+                43200000,
+                86400000
+        };
         for (int i = 0; i < expected.length; ++i) {
             final LocalTime time = TIMES[i];
             assertEquals(expected[i], time.hashCode());

@@ -37,6 +37,8 @@ public final class Assert {
      *        the object/reference to check
      * @param message
      *        the {@link NullPointerException} message
+     * @param args
+     *        the (optional) message arguments
      */
     public static void notNull(final Object o, final String message, final Object... args) {
         if (o == null) {
@@ -51,7 +53,7 @@ public final class Assert {
      * @param message
      *        the {@link IllegalArgumentException} message
      * @param args
-     *        the message arguments
+     *        the (optional) message arguments
      */
     public static void isTrue(final boolean condition, final String message, final Object... args) {
         if (!condition) {

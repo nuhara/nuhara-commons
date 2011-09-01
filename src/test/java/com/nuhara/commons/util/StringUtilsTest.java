@@ -36,7 +36,6 @@ public final class StringUtilsTest {
 	 */
 	private static final String APPLE = "apple";
 
-
 	/**
 	 * Test for {@link StringUtils#join(String, Object[])} .
 	 */

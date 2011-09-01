@@ -23,6 +23,7 @@ import org.junit.Test;
 
 /**
  * Junit test for {@link ClassUtils}.
+ *
  * @author Alistair A. Israel
  */
 public final class ClassUtilsTest {

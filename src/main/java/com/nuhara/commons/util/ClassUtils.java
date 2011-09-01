@@ -36,6 +36,7 @@ public final class ClassUtils {
      * @return the 'friendly' class name
      */
     public static String getShortClassName(final Class<?> clazz) {
+        Assert.notNull(clazz, "getShortClassName(null)!");
         final String className = clazz.getName();
         int i = className.lastIndexOf('$');
         if (i == -1) {
@@ -46,4 +47,15 @@ public final class ClassUtils {
         }
         return className.substring(i + 1);
     }
+
+    /**
+     * @param o
+     *        an object
+     * @return the 'friendly' class name of the object
+     */
+    public static String getShortClassName(final Object o) {
+        Assert.notNull(o, "getShortClassName(null)!");
+        return getShortClassName(o.getClass());
+    }
+
 }

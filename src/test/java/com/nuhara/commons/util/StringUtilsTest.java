@@ -28,7 +28,6 @@ import org.junit.Test;
  *
  * @author Alistair A. Israel
  */
-@Ignore
 public final class StringUtilsTest {
 
 	/**
@@ -54,6 +53,7 @@ public final class StringUtilsTest {
 	/**
 	 * Test for {@link StringUtils#join(char, Object[])} .
 	 */
+	@Ignore
 	@Test
 	public void testJoinCharObjectArray() {
 		fail("Not yet implemented");
@@ -62,6 +62,7 @@ public final class StringUtilsTest {
 	/**
 	 * Test for {@link StringUtils#join(StringBuffer, String, Object[])}
 	 */
+	@Ignore
 	@Test
 	public void testJoinStringBufferStringObjectArray() {
 		fail("Not yet implemented");
@@ -70,6 +71,7 @@ public final class StringUtilsTest {
 	/**
 	 * Test for {@link StringUtils#join(StringBuffer, char, Object[])}
 	 */
+	@Ignore
 	@Test
 	public void testJoinStringBufferCharObjectArray() {
 		fail("Not yet implemented");
@@ -78,6 +80,7 @@ public final class StringUtilsTest {
 	/**
 	 * Test for {@link StringUtils#join(StringBuilder, String, Object[])}
 	 */
+	@Ignore
 	@Test
 	public void testJoinStringBuilderStringObjectArray() {
 		fail("Not yet implemented");
@@ -86,6 +89,7 @@ public final class StringUtilsTest {
 	/**
 	 * Test for {@link StringUtils#join(StringBuilder, char, Object[])}
 	 */
+	@Ignore
 	@Test
 	public void testJoinStringBuilderCharObjectArray() {
 		fail("Not yet implemented");

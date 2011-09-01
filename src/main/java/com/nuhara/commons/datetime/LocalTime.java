@@ -236,7 +236,7 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
     // SUPPRESS CHECKSTYLE DesignForExtension
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder(12);
         final Formatter f = new Formatter(sb);
         f.format("%02d:%02d", hour, minute);
         if (second != null) {

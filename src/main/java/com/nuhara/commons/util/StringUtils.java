@@ -95,6 +95,8 @@ public final class StringUtils {
     }
 
     /**
+     * Premature optimization, which is evil.
+     *
      * @param delimLength
      *        the length of the delimiter
      * @param args
@@ -217,6 +219,4 @@ public final class StringUtils {
             }
         }
     }
-
-
 }

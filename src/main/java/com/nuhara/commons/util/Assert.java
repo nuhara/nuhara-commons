@@ -36,11 +36,23 @@ public final class Assert {
      * @param o
      *        the object/reference to check
      * @param message
-     *        the exception message
+     *        the {@link NullPointerException} message
      */
     public static void notNull(final Object o, final String message) {
         if (o == null) {
             throw new NullPointerException(message);
+        }
+    }
+
+    /**
+     * @param condition
+     *        the boolean condition to check
+     * @param message
+     *        the {@link IllegalArgumentException} message
+     */
+    public static void isTrue(final boolean condition, final String message) {
+        if (!condition) {
+            throw new IllegalArgumentException(message);
         }
     }
 }

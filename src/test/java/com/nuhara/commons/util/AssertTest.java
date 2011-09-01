@@ -36,12 +36,28 @@ public final class AssertTest {
      */
     @Test
     public void testNotNull() {
+        Assert.notNull(this, "Should never happen!");
         try {
             Assert.notNull(null, "NPE message");
             fail("NullPointerException not thrown!");
         } catch (final Exception e) {
             assertTrue("Expecting NullPointerException, got " + getShortClassName(e), e instanceof NullPointerException);
             assertEquals("NPE message", e.getMessage());
+        }
+    }
+
+    /**
+     * Test for {@link Assert#isTrue(boolean, String)}.
+     */
+    @Test
+    public void testIsTrue() {
+        Assert.isTrue(true, "Should not be thrown!");
+        try {
+            Assert.isTrue(false, "false!");
+            fail("IllegalArgumentException not thrown!");
+        } catch (final Exception e) {
+            assertTrue("Expecting IllegalArgumentException, got " + getShortClassName(e), e instanceof IllegalArgumentException);
+            assertEquals("false!", e.getMessage());
         }
     }
 

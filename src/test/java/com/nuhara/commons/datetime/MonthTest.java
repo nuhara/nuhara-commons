@@ -17,6 +17,7 @@
  */
 package com.nuhara.commons.datetime;
 
+import static com.nuhara.commons.datetime.DateUtils.UTC;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -43,5 +44,16 @@ public final class MonthTest {
 			assertEquals(Month.values()[i], month);
 			assertEquals(month.intValue(), i);
 		}
+	}
+
+	/**
+	 * Test for {@link Month#of(Calendar)}
+	 */
+	@Test
+	public void testOfCalendar() {
+	    final Calendar cal = Calendar.getInstance(UTC);
+	    cal.set(2011, Calendar.FEBRUARY, 24);
+	    final Month month = Month.of(cal);
+	    assertEquals(Month.FEBRUARY, month);
 	}
 }

@@ -17,6 +17,8 @@
  */
 package com.nuhara.commons.datetime;
 
+import static java.util.Calendar.MONTH;
+
 import java.util.Calendar;
 
 /**
@@ -27,95 +29,103 @@ import java.util.Calendar;
  */
 public enum Month {
 
-	/**
-	 * Corresponds to {@link Calendar#JANUARY}
-	 */
-	JANUARY(Calendar.JANUARY),
+    /**
+     * Corresponds to {@link Calendar#JANUARY}
+     */
+    JANUARY(Calendar.JANUARY),
 
-	/**
-	 * Corresponds to {@link Calendar#FEBRUARY}
-	 */
-	FEBRUARY(Calendar.FEBRUARY),
+    /**
+     * Corresponds to {@link Calendar#FEBRUARY}
+     */
+    FEBRUARY(Calendar.FEBRUARY),
 
-	/**
-	 * Corresponds to {@link Calendar#MARCH}
-	 */
-	MARCH(Calendar.MARCH),
+    /**
+     * Corresponds to {@link Calendar#MARCH}
+     */
+    MARCH(Calendar.MARCH),
 
-	/**
-	 * Corresponds to {@link Calendar#APRIL}
-	 */
-	APRIL(Calendar.APRIL),
+    /**
+     * Corresponds to {@link Calendar#APRIL}
+     */
+    APRIL(Calendar.APRIL),
 
-	/**
-	 * Corresponds to {@link Calendar#MAY}
-	 */
-	MAY(Calendar.MAY),
+    /**
+     * Corresponds to {@link Calendar#MAY}
+     */
+    MAY(Calendar.MAY),
 
-	/**
-	 * Corresponds to {@link Calendar#JUNE}
-	 */
-	JUNE(Calendar.JUNE),
+    /**
+     * Corresponds to {@link Calendar#JUNE}
+     */
+    JUNE(Calendar.JUNE),
 
-	/**
-	 * Corresponds to {@link Calendar#JULY}
-	 */
-	JULY(Calendar.JULY),
+    /**
+     * Corresponds to {@link Calendar#JULY}
+     */
+    JULY(Calendar.JULY),
 
-	/**
-	 * Corresponds to {@link Calendar#AUGUST}
-	 */
-	AUGUST(Calendar.AUGUST),
+    /**
+     * Corresponds to {@link Calendar#AUGUST}
+     */
+    AUGUST(Calendar.AUGUST),
 
-	/**
-	 * Corresponds to {@link Calendar#SEPTEMBER}
-	 */
-	SEPTEMBER(Calendar.SEPTEMBER),
+    /**
+     * Corresponds to {@link Calendar#SEPTEMBER}
+     */
+    SEPTEMBER(Calendar.SEPTEMBER),
 
-	/**
-	 * Corresponds to {@link Calendar#OCTOBER}
-	 */
-	OCTOBER(Calendar.OCTOBER),
+    /**
+     * Corresponds to {@link Calendar#OCTOBER}
+     */
+    OCTOBER(Calendar.OCTOBER),
 
-	/**
-	 * Corresponds to {@link Calendar#NOVEMBER}
-	 */
-	NOVEMBER(Calendar.NOVEMBER),
+    /**
+     * Corresponds to {@link Calendar#NOVEMBER}
+     */
+    NOVEMBER(Calendar.NOVEMBER),
 
-	/**
-	 * Corresponds to {@link Calendar#DECEMBER}
-	 */
-	DECEMBER(Calendar.DECEMBER);
+    /**
+     * Corresponds to {@link Calendar#DECEMBER}
+     */
+    DECEMBER(Calendar.DECEMBER);
 
-	private final int intValue;
+    private final int intValue;
 
-	/**
-	 * @param intValue
-	 *            the corresponding {@code int} constant value from
-	 *            {@link java.util.Calendar}
-	 */
-	private Month(final int intValue) {
-		this.intValue = intValue;
-	}
+    /**
+     * @param intValue
+     *        the corresponding {@code int} constant value from {@link java.util.Calendar}
+     */
+    private Month(final int intValue) {
+        this.intValue = intValue;
+    }
 
-	/**
-	 * @return the corresponding {@code int} constant value from
-	 *         {@link java.util.Calendar}
-	 */
-	public int intValue() {
-		return this.intValue;
-	}
+    /**
+     * @return the corresponding {@code int} constant value from {@link java.util.Calendar}
+     */
+    public int intValue() {
+        return this.intValue;
+    }
 
-	/**
-	 * @param intValue
-	 *            the {@code int} constant value from {@link java.util.Calendar}
-	 * @return the {@code Month}
-	 */
-	public static Month lookup(final int intValue) {
-		if (intValue < Calendar.JANUARY || intValue > Calendar.DECEMBER) {
-		    throw new IllegalArgumentException("Invalid month value " + intValue);
-		}
-		// we only get away with this because Calendar.JANUARY == 0!
-		return Month.values()[intValue];
-	}
+    /**
+     * @param intValue
+     *        the {@code int} constant value from {@link java.util.Calendar}
+     * @return the {@code Month}
+     */
+    public static Month lookup(final int intValue) {
+        if (intValue < Calendar.JANUARY || intValue > Calendar.DECEMBER) {
+            throw new IllegalArgumentException("Invalid month value " + intValue);
+        }
+        // we only get away with this because Calendar.JANUARY == 0!
+        return Month.values()[intValue];
+    }
+
+    /**
+     * @param cal
+     *        the (Gregorian) calendar
+     * @return the Month
+     */
+    public static Month of(final Calendar cal) {
+        assert cal != null : "calendar is null!";
+        return Month.lookup(cal.get(MONTH));
+    }
 }

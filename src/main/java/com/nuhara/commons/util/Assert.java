@@ -38,9 +38,10 @@ public final class Assert {
      * @param message
      *        the {@link NullPointerException} message
      */
-    public static void notNull(final Object o, final String message) {
+    public static void notNull(final Object o, final String message, final Object... args) {
         if (o == null) {
-            throw new NullPointerException(message);
+            final String msg = safeFormat(message, args);
+            throw new NullPointerException(msg);
         }
     }
 
@@ -49,10 +50,31 @@ public final class Assert {
      *        the boolean condition to check
      * @param message
      *        the {@link IllegalArgumentException} message
+     * @param args
+     *        the message arguments
      */
-    public static void isTrue(final boolean condition, final String message) {
+    public static void isTrue(final boolean condition, final String message, final Object... args) {
         if (!condition) {
-            throw new IllegalArgumentException(message);
+            final String msg = safeFormat(message, args);
+            throw new IllegalArgumentException(msg);
         }
+    }
+
+    /**
+     * @param format
+     *        the format string
+     * @param args
+     *        the arguments
+     * @return the formatted string
+     */
+    private static String safeFormat(final String format, final Object... args) {
+        final String msg;
+        if (args != null && args.length > 0) {
+            assert format != null : "message is null!";
+            msg = String.format(format, args);
+        } else {
+            msg = format;
+        }
+        return msg;
     }
 }

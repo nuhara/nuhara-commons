@@ -17,6 +17,7 @@
  */
 package com.nuhara.commons.datetime;
 
+import static com.nuhara.commons.datetime.DateUtils.UTC;
 import static com.nuhara.commons.datetime.Month.FEBRUARY;
 import static com.nuhara.commons.datetime.Month.JANUARY;
 import static com.nuhara.commons.util.ClassUtils.getShortClassName;
@@ -25,12 +26,39 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 
 /**
  * @author Alistair A. Israel
  */
 public final class LocalDateTest {
+
+    /**
+     * Test {@link LocalDate#today()}
+     */
+    @Test
+    public void testToday() {
+        final Calendar now = Calendar.getInstance();
+        final LocalDate today = LocalDate.today();
+        assertEquals(now.get(Calendar.YEAR), today.getYear());
+        assertEquals(now.get(Calendar.MONTH), today.getMonth().intValue());
+        assertEquals(now.get(Calendar.DAY_OF_MONTH), today.getDayOfMonth());
+    }
+
+    /**
+     * Test {@link LocalDate#today(java.util.TimeZone)}
+     */
+    @Test
+    public void testTodayInTimeZone() {
+        final Calendar now = Calendar.getInstance(UTC);
+        final LocalDate today = LocalDate.today(UTC);
+        assertEquals(now.get(Calendar.YEAR), today.getYear());
+        assertEquals(now.get(Calendar.MONTH), today.getMonth().intValue());
+        assertEquals(now.get(Calendar.DAY_OF_MONTH), today.getDayOfMonth());
+    }
+
 
     /**
      * Test {@link LocalDate#toString()}
@@ -46,13 +74,24 @@ public final class LocalDateTest {
      */
     @Test
     public void testInvalidConstruction() {
-        final Object[][] aargs = { { -1, FEBRUARY, 1 }, { 1899, FEBRUARY, 1 }, { 2100, FEBRUARY, 1 },
-                { 1999, FEBRUARY, 0 }, { 1999, FEBRUARY, 29 }, { 2000, FEBRUARY, 30 }, { 1900, null, 1 } };
-        final String[] msgs = { "Invalid year: -1! Year must be within 1900..2099",
+        final Object[][] aargs = {
+                { -1, FEBRUARY, 1 },
+                { 1899, FEBRUARY, 1 },
+                { 2100, FEBRUARY, 1 },
+                { 1999, FEBRUARY, 0 },
+                { 1999, FEBRUARY, 29 },
+                { 2000, FEBRUARY, 30 },
+                { 1900, null, 1 }
+        };
+        final String[] msgs = {
+                "Invalid year: -1! Year must be within 1900..2099",
                 "Invalid year: 1899! Year must be within 1900..2099",
-                "Invalid year: 2100! Year must be within 1900..2099", "Invalid day of month: 0! Must be within 1..28",
-                "Invalid day of month: 29! Must be within 1..28", "Invalid day of month: 30! Must be within 1..29",
-                "Month cannot be null!" };
+                "Invalid year: 2100! Year must be within 1900..2099",
+                "Invalid day of month: 0! Must be within 1..28",
+                "Invalid day of month: 29! Must be within 1..28",
+                "Invalid day of month: 30! Must be within 1..29",
+                "Month cannot be null!"
+        };
         for (int i = 0; i < msgs.length; ++i) {
             final Object[] args = aargs[i];
             try {

@@ -19,10 +19,12 @@ package com.nuhara.commons.datetime;
 
 import static com.nuhara.commons.datetime.DateUtils.UTC;
 import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.YEAR;
 
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import com.nuhara.commons.util.Assert;
 import com.nuhara.commons.util.Hashcode;
@@ -45,6 +47,24 @@ public class LocalDate implements Serializable, Comparable<LocalDate> {
     private final Month month;
 
     private final int dayOfMonth;
+
+    /**
+     * @return LocalDate in system default timezone
+     */
+    public static LocalDate today() {
+        final GregorianCalendar cal = new GregorianCalendar();
+        return new LocalDate(cal.get(YEAR), Month.of(cal), cal.get(DAY_OF_MONTH));
+    }
+
+    /**
+     * @param timeZone
+     *        the {@link TimeZone}
+     * @return LocalDate in the given timezone
+     */
+    public static LocalDate today(final TimeZone timeZone) {
+        final GregorianCalendar cal = new GregorianCalendar(timeZone);
+        return new LocalDate(cal.get(YEAR), Month.of(cal), cal.get(DAY_OF_MONTH));
+    }
 
     /**
      * @param year

@@ -3,10 +3,10 @@
 
   <groupId>com.nuhara</groupId>
   <artifactId>nuhara-commons</artifactId>
-  <packaging>jar</packaging>
-  <name>Nuhara Commons Library</name>
   <version>0.1-SNAPSHOT</version>
 
+  <packaging>jar</packaging>
+  <name>Nuhara Commons Library</name>
   <url>http://www.nuhara.com</url>
 
   <licenses>

@@ -17,12 +17,16 @@
  */
 package com.nuhara.commons.datetime;
 
+import static com.nuhara.commons.datetime.Month.FEBRUARY;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 /**
  * Junit test for {@link DateTime}
@@ -43,6 +47,13 @@ public final class DateTimeTest {
     private static final TimeZone PHT = TimeZone.getTimeZone("Asia/Manila");
 
     /**
+     * ExpectedException rule
+     */
+    @Rule
+    // SUPPRESS CHECKSTYLE VisibilityModifier
+    public final ExpectedException thrown = ExpectedException.none();
+
+    /**
      *
      */
     @Test
@@ -58,5 +69,15 @@ public final class DateTimeTest {
     public void testNewUsingLocalDateLocalTimeTimeZone() {
         final DateTime dt = new DateTime(FEB_24_2011, EIGHT_03, PHT);
         assertEquals("2011-02-24 08:03 PHT", dt.toString());
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testInvalidYear() {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage(is("Invalid year: -1! Year must be within 1900..2099"));
+        DateTime.getDateTime(-1, FEBRUARY, 24, 8, 3, 0, PHT);
     }
 }

@@ -238,12 +238,16 @@ public class LocalTime implements Serializable, Comparable<LocalTime> {
     public String toString() {
         final StringBuilder sb = new StringBuilder(12);
         final Formatter f = new Formatter(sb);
-        f.format("%02d:%02d", hour, minute);
-        if (second != null) {
-            f.format(":%02d", second.intValue());
-            if (millis != null) {
-                f.format(".%03d", millis.intValue());
+        try {
+            f.format("%02d:%02d", hour, minute);
+            if (second != null) {
+                f.format(":%02d", second.intValue());
+                if (millis != null) {
+                    f.format(".%03d", millis.intValue());
+                }
             }
+        } finally {
+            f.close();
         }
         return sb.toString();
     }
